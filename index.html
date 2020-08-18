@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calc</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.css" integrity="sha512-Rp0yZ3NMh1xOUZ4VHYggmX4pq4ZJdpcOETH03qBD5qNDsqTBw1MzUnX0T5PcTJmr2mNTOmtbxsHaGwzjylNpHA==" crossorigin="anonymous" />
+  <style>
+    @font-face {
+      font-family: 'Exo 2 Italic';
+      src: url('exo-2-v7-latin_cyrillic-italic-9ab59a9128d27aebb9dc53ac554ad94552ae7bdf79498cd656772a304beedd19.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Exo 2';
+      src: url('exo-2-v7-latin_cyrillic-regular-1b78bb07dc4d3ecd3f193a4fb393d1365d12885eed5b17fa55891f62302ed5b3.woff2') format('woff2');
+    }
+    *{
+      font-family: 'Exo 2', sans-serif;
+    }
+    .calc-form{
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .calc-title {
+      margin: 30px 0;
+      color: #cc6909;
+      font-weight: inherit;
+      font-size: 22px;
+      text-align: center;
+      text-transform: capitalize;
+      letter-spacing: 0;
+      text-rendering: optimizeLegibility;
+    }
+    .btn-calc-submit{
+      display: block;
+      position: relative;
+      width: auto;
+      height: auto;
+      margin: 30px auto;
+      padding: 15px 36px;
+      overflow: hidden;
+      transition: border 0.2s ease, background 0.2s ease, color 0.2s ease;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: #cc6909;
+      font-size: 15px;
+      font-weight: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(204,105,9,0.25);
+    }
+    .btn-calc-submit:hover{
+      background: #cc6909;
+      color: #fff;
+      text-decoration: none;
+    }
+    .calc-per-hour,
+    .calc-hours,
+    .calc-total{
+      margin-top: 15px;
+      font-size: 13px;
+      color: #373734;
+    }
+    .calc-hours__value,
+    .calc-per-hour__value,
+    .calc-total__value{
+      color: #cc6909;
+    }
+    .calc-rangeslider{
+      position: relative;
+      display: block;
+      background-color: #373734;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+    .calc-rangeslider--horizontal{
+      height: 10px;
+    }
+    .calc-rangeslider__fill{
+      position: relative;
+      height: 100%;
+      background: #cc6909;
+      display: block;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+    .calc-rangeslider__handle{
+      position: absolute;
+      top: -5px;
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+      background-color: #ffffff;
+      border: 1px solid #cc6909;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="calc-b">
+    <div class="calc-title">— калькулятор —</div>
+    <form action="" method="GET" class="calc-form">
+      <input type="range" min="1" max="16" step="1" value="1">
+      <input type="hidden" name="hours" id="hours">
+      <input type="hidden" name="totalsum" id="totalsum">
+      <div class="calc-hours"><b>Часов:</b> <span class="calc-hours__value"></span></div>
+      <div class="calc-per-hour"><b>Почасовая сумма:</b> <span class="calc-per-hour__value"></span> руб./час</div>
+      <div class="calc-total"><b>Итоговая сумма:</b> <span class="calc-total__value"></span> руб.</div>
+      <button class="btn-calc-submit" type="submit">заказать</button>
+    </form>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.js" integrity="sha512-BUlWdwDeJo24GIubM+z40xcj/pjw7RuULBkxOTc+0L9BaGwZPwiwtbiSVzv31qR7TWx7bs6OPTE5IyfLOorboQ==" crossorigin="anonymous"></script>
+  <script>
+    var perHour = [3000,2750,2670,2500,2400,2340,2290,2250,2170,2100,2050,2000,1970,1930,1900,1875];
+    $('input[type="range"]').rangeslider({
+
+      // Feature detection the default is `true`.
+      // Set this to `false` if you want to use
+      // the polyfill also in Browsers which support
+      // the native <input type="range"> element.
+      polyfill: false,
+
+      // // Default CSS classes
+      rangeClass: 'calc-rangeslider',
+      fillClass: 'calc-rangeslider__fill',
+      horizontalClass: 'calc-rangeslider--horizontal',
+      handleClass: 'calc-rangeslider__handle',
+
+      // Callback function
+      onInit: function() {
+        $('.calc-per-hour__value').text(perHour[0]);
+        $('.calc-total__value').text(perHour[0]);
+        $('.calc-hours__value').text(1);
+      },
+
+      // Callback function
+      onSlide: function(position, value) {
+        var total = perHour[value-1]*value;
+        $('.calc-hours__value').text(value);
+        $('.calc-per-hour__value').text(perHour[value-1]);
+        $('.calc-total__value').text(total);
+        $('#hours').val(value);
+        $('#totalsum').val(total);
+      },
+
+      // Callback function
+      onSlideEnd: function(position, value) {}
+    });
+  </script>
+</body>
+</html>
