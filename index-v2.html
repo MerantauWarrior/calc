@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calc</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.css" integrity="sha512-Rp0yZ3NMh1xOUZ4VHYggmX4pq4ZJdpcOETH03qBD5qNDsqTBw1MzUnX0T5PcTJmr2mNTOmtbxsHaGwzjylNpHA==" crossorigin="anonymous" />
+  <style>
+    @font-face {
+      font-family: 'Exo 2 Italic';
+      src: url('exo-2-v7-latin_cyrillic-italic-9ab59a9128d27aebb9dc53ac554ad94552ae7bdf79498cd656772a304beedd19.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Exo 2';
+      src: url('exo-2-v7-latin_cyrillic-regular-1b78bb07dc4d3ecd3f193a4fb393d1365d12885eed5b17fa55891f62302ed5b3.woff2') format('woff2');
+    }
+    *{
+      font-family: 'Exo 2', sans-serif;
+    }
+    .calc-form{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .calc-title {
+      margin: 30px 0;
+      color: #cc6909;
+      font-weight: inherit;
+      font-size: 22px;
+      text-align: center;
+      text-transform: capitalize;
+      letter-spacing: 0;
+      text-rendering: optimizeLegibility;
+    }
+    .btn-calc-submit{
+      display: block;
+      position: relative;
+      width: auto;
+      height: auto;
+      margin: 0 0 15px 0;
+      padding: 15px 36px;
+      overflow: hidden;
+      transition: border 0.2s ease, background 0.2s ease, color 0.2s ease;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: #cc6909;
+      font-size: 15px;
+      font-weight: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(204,105,9,0.25);
+    }
+    .btn-calc-submit:hover{
+      background: #cc6909;
+      color: #fff;
+      text-decoration: none;
+    }
+    .calc-per-hour,
+    .label-calc,
+    .calc-total{
+      margin-top: 15px;
+      font-size: 13px;
+      color: #373734;
+    }
+    .calc-b__col{
+      width: 40%;
+    }
+    .calc-b__field{
+      display: flex;
+    }
+    .inp-calc{
+      width: 20px;
+      margin-left: 5px;
+      padding: 15px 20px;
+      border: 1px solid rgba(204,105,9,0.25);
+      background: #fff;
+      color: #cc6909;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="calc-b">
+    <div class="calc-title">— калькулятор —</div>
+    <form action="" method="GET" class="calc-form">
+      <input type="hidden" name="totalsum" id="totalsum">
+      <div class="calc-b__col">
+        <div class="calc-b__field">
+          <label for="hours" class="label-calc">Часов:</label>
+          <input type="text" min="1" max="16" name="hours" id="hours" class="inp-calc">
+        </div>
+        <div class="calc-per-hour">Стоимость часа: <b><span class="calc-per-hour__value">1212</span></b> руб./час</div>
+      </div>
+      <div class="calc-b__col">
+        <button class="btn-calc-submit" type="button">рассчитать</button>
+        <div class="calc-total">Итоговая сумма: <b><span class="calc-total__value">1212</span></b> руб.</div>
+      </div>
+
+    </form>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script>
+    var perHour = [3000,2750,2670,2500,2400,2340,2290,2250,2170,2100,2050,2000,1970,1930,1900,1875];
+
+    $('.calc-per-hour__value').text(perHour[0]);
+    $('.calc-total__value').text(perHour[0]);
+    $('.inp-calc').val(1);
+
+    $('.btn-calc-submit').on('click',function (e) {
+      e.preventDefault();
+      var value = $('.inp-calc').val();
+      var total = perHour[value-1]*value;
+      $('.calc-hours__value').text(value);
+      $('.calc-per-hour__value').text(perHour[value-1]);
+      $('.calc-total__value').text(total);
+      $('#hours').val(value);
+      $('#totalsum').val(total);
+    })
+
+  </script>
+</body>
+</html>
