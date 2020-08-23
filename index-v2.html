@@ -72,13 +72,18 @@
       display: flex;
     }
     .inp-calc{
-      width: 20px;
       margin-left: 5px;
       padding: 15px 20px;
       border: 1px solid rgba(204,105,9,0.25);
       background: #fff;
       color: #cc6909;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
       outline: none;
+    }
+    .inp-calc option{
+      line-height: 2em;
     }
   </style>
 </head>
@@ -91,7 +96,24 @@
       <div class="calc-b__col">
         <div class="calc-b__field">
           <label for="hours" class="label-calc">Часов:</label>
-          <input type="text" min="1" max="16" name="hours" id="hours" class="inp-calc">
+          <select name="hours" id="hours" class="inp-calc">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+          </select>
         </div>
         <div class="calc-per-hour">Стоимость часа: <b><span class="calc-per-hour__value">1212</span></b> руб./час</div>
       </div>
