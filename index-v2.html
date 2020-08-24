@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Calc</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.css" integrity="sha512-Rp0yZ3NMh1xOUZ4VHYggmX4pq4ZJdpcOETH03qBD5qNDsqTBw1MzUnX0T5PcTJmr2mNTOmtbxsHaGwzjylNpHA==" crossorigin="anonymous" />
   <style>
     @font-face {
       font-family: 'Exo 2 Italic';
@@ -14,7 +14,15 @@
       src: url('exo-2-v7-latin_cyrillic-regular-1b78bb07dc4d3ecd3f193a4fb393d1365d12885eed5b17fa55891f62302ed5b3.woff2') format('woff2');
     }
     *{
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
       font-family: 'Exo 2', sans-serif;
+    }
+    html, body{
+      width: 100%;
+      margin: 0;
+      padding: 0;
     }
     .calc-form{
       display: flex;
@@ -72,6 +80,7 @@
       display: flex;
     }
     .inp-calc{
+      width: 80px;
       margin-left: 5px;
       padding: 15px 20px;
       border: 1px solid rgba(204,105,9,0.25);
@@ -85,6 +94,13 @@
     }
     .inp-calc option{
       line-height: 2em;
+    }
+    @media all and (min-width: 320px) and (max-width: 767px){
+      .calc-b__col{
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 0 15px;
+      }
     }
   </style>
 </head>
