@@ -97,9 +97,12 @@
     }
     @media all and (min-width: 320px) and (max-width: 767px){
       .calc-b__col{
-        width: 100%;
+        width: 50%;
         margin-bottom: 15px;
         padding: 0 15px;
+      }
+      .calc-total__label{
+        display: block;
       }
     }
   </style>
@@ -132,11 +135,11 @@
             <option value="16">16</option>
           </select>
         </div>
-        <div class="calc-per-hour">Стоимость часа: <b><span class="calc-per-hour__value">1212</span></b> руб./час</div>
+        <div class="calc-per-hour"><span class="calc-total__label">Стоимость часа:</span> <b><span class="calc-per-hour__value">3000</span></b> руб./час</div>
       </div>
       <div class="calc-b__col">
         <button class="btn-calc-submit" type="button">рассчитать</button>
-        <div class="calc-total">Итоговая сумма: <b><span class="calc-total__value">1212</span></b> руб.</div>
+        <div class="calc-total"><span class="calc-total__label">Итоговая сумма:</span> <b><span class="calc-total__value">3000</span></b> руб.</div>
       </div>
 
     </form>
